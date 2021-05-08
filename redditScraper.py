@@ -9,9 +9,9 @@ import requests
 
 
 
-user_agent = 'pc:pythonBot:v1 (by /u/No-Desk-5113)'
-client_id = 'tsQzGU_eCwFkZw'
-client_secret = 'Vutq--oPlXzITc4RQkOI4FkM_RbVrA'
+user_agent = "your agent"
+client_id = 'your id'
+client_secret = 'your secret'
 
 class RedditHandler():
     def __init__(self, reddit):
@@ -33,7 +33,7 @@ class RedditHandler():
             if idx == 0:
                 posts = sub.hot(limit = number)
                 for post in posts:
-                    self.post_urls.append(post.url.encode('utf-8'))
+                    self.post_urls.append(post.url)
                     self.post_title.append(post.title)
                     self.post_score.append(post.score)
                     self.post_time.append(datetime.datetime.fromtimestamp(post.created))
@@ -41,7 +41,7 @@ class RedditHandler():
             elif idx == 1:
                 posts = sub.new(limit = number)
                 for post in posts:
-                    self.post_urls.append(post.url.encode('utf-8'))
+                    self.post_urls.append(post.url)
                     self.post_title.append(post.title)
                     self.post_score.append(post.score)
                     self.post_time.append(datetime.datetime.fromtimestamp(post.created))
@@ -49,8 +49,8 @@ class RedditHandler():
             elif idx == 2:
                 posts = sub.rising(limit = number)
                 for post in posts:
-                    self.post_urls.append(post.url.encode('utf-8'))
-                    self.post_title.append(post.title.encode('utf-8'))
+                    self.post_urls.append(post.url)
+                    self.post_title.append(post.title)
                     self.post_score.append(post.score)
                     self.post_time.append(datetime.datetime.fromtimestamp(post.created))
                     self.post_id.append(post.id)
@@ -59,8 +59,8 @@ class RedditHandler():
                 i = random.randint(0, len(x))
                 posts = sub.top(x[i], limit=number )
                 for post in posts:
-                    self.post_urls.append(post.url.encode('utf-8'))
-                    self.post_title.append(post.title.encode('utf-8'))
+                    self.post_urls.append(post.url)
+                    self.post_title.append(post.title)
                     self.post_score.append(post.score)
                     self.post_time.append(datetime.datetime.fromtimestamp(post.created))
                     self.post_id.append(post.id)
@@ -79,7 +79,7 @@ class RedditHandler():
                 # k = self.post_urls[ind][1:]
                 # print(k)
                 print(type(dirpath), type(self.post_title[ind]), type(ext))
-                req.urlretrieve(self.post_urls[ind].decode('utf-8'), dirpath+self.post_title[ind]+ext.decode("utf-8"))
+                req.urlretrieve(self.post_urls[ind], dirpath+'/'+self.post_title[ind]+ext)
             except Exception as e:
                 print('Something when wrong :( <<<<<', e)
 
@@ -88,8 +88,8 @@ reddit = praw.Reddit(client_id=client_id, client_secret = client_secret,
                         user_agent = user_agent)
 
 handle = RedditHandler(reddit)
-a = handle.get_posts(10, 'wholesomememes', 'hot')
-handle.save_all('wholesomememes')
+a = handle.get_posts(10, 'cursedcomments', 'new')
+handle.save_all('cursedcomments')
 
 # sub = reddit.subreddit('ProgrammerHumor')
 # posts = sub.rising(limit=10)

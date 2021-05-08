@@ -1,0 +1,1 @@
+Remeber to run it on cmd (windows) and run it as adimin otherwise it might throw error. 
